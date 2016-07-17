@@ -5,5 +5,6 @@
   <%= k.age %>
   <%= k.cuteness %>
   <%= k.softness %>
+  <%= link_to 'Destroy', kitten_path(k), data: {:confirm => 'Do you really want to delete this cutie?'}, :method => :delete %>
   <br>
 <% end %>

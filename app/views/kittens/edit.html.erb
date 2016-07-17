@@ -1,1 +1,3 @@
 <%= render 'kittens_form'%>
+
+<%= link_to 'Destroy', kitten_path(@kitten), data: {:confirm => 'Do you really want to delete this cutie?'}, :method => :delete %>

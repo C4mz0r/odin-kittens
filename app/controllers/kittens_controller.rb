@@ -14,8 +14,10 @@ class KittensController < ApplicationController
   def create
     @kitten = Kitten.new(kitten_params)
     if @kitten.save
-      redirect_to kittens_path(@kitten)      
+      flash[:notice] = "Kitten was created"
+      redirect_to kittens_path            
     else
+      flash[:notice] = "Error creating kitten - try again"
       redirect_to new_kittens_path
     end
   end
@@ -26,11 +28,21 @@ class KittensController < ApplicationController
   
   def update
     @kitten = Kitten.find(params[:id])
-    @kitten.update_attributes(kitten_params)
+    if @kitten.update_attributes(kitten_params)
+      flash[:notice] = "Kitten was edited"
+    else
+      flash[:notice] = "Kitten was not updated"
+    end
   end
   
-  def delete
-    
+  def destroy
+    @kitten = Kitten.find(params[:id])
+    if @kitten.destroy
+      redirect_to kittens_path
+      flash[:notice] = "Kitten was deleted"
+    else
+      flash[:notice] = "Kitten was not deleted"
+    end
   end
   
     private
